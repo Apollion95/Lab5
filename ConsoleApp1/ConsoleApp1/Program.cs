@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text;
+using System.Text.RegularExpressions;
+
 
 namespace ConsoleApp1
 {
@@ -143,7 +145,7 @@ namespace ConsoleApp1
                 }
                 Console.WriteLine("w tej sesji uczyles sie " + hh + " godzin " + mm + " minut " + ss + " sekund");
                 Console.WriteLine("Czy wykonales kolejna sesje? y/n?");
-            } while ((Console.ReadLine() == "y") || (Console.ReadLine() == "y"));
+            } while (Console.ReadLine() == "y");
             Console.WriteLine("Lacznie uczyles sie " + hhSum + " godzin " + mmSum + " minut " + ssSum + " sekund, i wykonales lacznie sesji " + nrSesji + "");
 
             //Zadanie 2
@@ -153,15 +155,24 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("Ile chcesz pytan? ");
                 q = Convert.ToInt16(Console.ReadLine());
-                string[] pytania = new string[q];
-                odpowiedzi = new char[q];
-                for (int i = 0; i < pytania.Length; i++)
-                {
-                    numer = i + 1;
-                    Console.WriteLine("Jaka jest odpowiedz na " + numer + " pytanie?");
-                    odpowiedzi[i] = Convert.ToChar(Console.ReadLine());
-                    odpowiedzi[i] = char.ToUpper(odpowiedzi[i]);
-                }
+                    string[] pytania = new string[q];
+                    odpowiedzi = new char[q];
+                    for (int i = 0; i < pytania.Length; i++)
+                    {
+                        numer = i + 1;
+                        Console.WriteLine("Jaka jest odpowiedz na " + numer + " pytanie?");
+                        odpowiedzi[i] = Convert.ToChar(Console.ReadLine()) ;
+                    if (odpowiedzi[i] >= 'a' ^ odpowiedzi[i] <= 'd' ^ odpowiedzi[i] >= 'A' ^ odpowiedzi[i] <= 'D')
+                    {
+                        odpowiedzi[i] = char.ToUpper(odpowiedzi[i]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wprowadzono niedozwolony znak!");
+                        i--; //jezeli wprowadzony znak jest inny niz a-d lub A-D to numer pytania pozostaje to samo
+                    }
+                    }
+
                 Console.WriteLine("Test pierwszy miał ponizsze odpowiedzi");
                 Test();
                 wynik = punkty * 100 / pytania.Length;
