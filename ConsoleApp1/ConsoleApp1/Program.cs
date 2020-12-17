@@ -3,6 +3,73 @@ using System.Text;
 
 namespace ConsoleApp1
 {
+    public enum Proces
+    {
+        Zapelnianie = 1,
+        Zwalnianie = 2
+    }
+    public class Bufor
+    {
+        public double dane = 0;
+        public Proces proces;
+        public void Wczytuj()
+        {
+            if (dane < 50)
+            {
+                Console.WriteLine("Nowy Proces Zapelnianie "+dane);
+                proces = Proces.Zapelnianie;
+            }
+            else
+            {
+                Console.WriteLine("Kolejka jest pelna");
+            }
+                
+            
+        }
+        public void Zapisuj()
+        {
+            if (dane > 0)
+            {
+                Console.WriteLine("Nowy Proces Zwalnianie "+dane);
+                proces = Proces.Zwalnianie;
+            }
+            else
+            {
+                Console.WriteLine("Kolejka jest pusta");
+            }
+        }
+        public void Cykl()
+        {
+            if (proces==Proces.Zapelnianie)
+            {
+                if (dane < 50)
+                {
+                    dane++;
+                }
+                else
+                {
+                    Console.WriteLine("Kolejka jest pelna");
+                }
+            }
+
+            if (proces == Proces.Zwalnianie)
+            {
+                if (dane > 0)
+                {
+                    dane--;
+                }
+                else
+                {
+                    Console.WriteLine("Kolejka jest pusta");
+                }
+                   
+                
+            }
+
+        }
+
+    }
+
     class Program
     {
         public static int q=0;
@@ -22,7 +89,7 @@ namespace ConsoleApp1
             for (int i = 0; i < q; i++)
             {
                 LosoweOdpowiedzi[i] = Litera();
-             //   Console.WriteLine(LosoweOdpowiedzi[i]);
+               Console.WriteLine("Odpowiedz "+i+" "+LosoweOdpowiedzi[i]);
                 if (LosoweOdpowiedzi[i] == odpowiedzi[i])
                     {
                         punkty++;
@@ -82,6 +149,7 @@ namespace ConsoleApp1
             //Zadanie 2
 
             int numer = 0;
+            int wynik = 0;
             {
                 Console.WriteLine("Ile chcesz pytan? ");
                 Console.WriteLine("Uwaga wprowadzone odpowiedzi musza byc wilekimi literami");
@@ -94,13 +162,45 @@ namespace ConsoleApp1
                     Console.WriteLine("Jaka jest odpowiedz na " + numer + " pytanie?");
                     odpowiedzi[i] = Convert.ToChar(Console.ReadLine());
                 }
+                Console.WriteLine("Test pierwszy miał ponizsze odpowiedzi");
                 Test();
-                Console.WriteLine("Test pierwszy uzyskal " + punkty + "/" + questions.Length);
-                Test();
-                Console.WriteLine("Test drugi uzyskal " + punkty + "/" + questions.Length);
+                wynik = punkty * 100 / questions.Length;
+                Console.WriteLine("Test pierwszy uzyskal " + wynik + "%");
 
-                Console.ReadKey();
+                wynik = punkty * 100 / questions.Length;
+                Console.WriteLine("Test drugi miał ponizsze odpowiedzi");
+                Test();
+                Console.WriteLine("Test drugi uzyskal " + wynik + "%");
             }
+
+            //zadanie 3 Testy
+
+            var x = new Bufor();
+            x.Wczytuj();
+            x.Cykl();
+            x.Wczytuj();
+            x.Cykl(); 
+            x.Zapisuj();
+            x.Cykl();
+            x.Zapisuj();
+            x.Cykl();
+            x.Zapisuj();
+            x.Cykl();
+            x.Zapisuj();
+            x.Cykl();
+            for (int i = 0; i < 55; i++)
+            {
+                x.Wczytuj();
+                x.Cykl();
+            }
+            for (int i = 0; i < 55; i++)
+            {
+                x.Zapisuj();
+                x.Cykl();
+            }
+
+
+
         }
     }
 }
