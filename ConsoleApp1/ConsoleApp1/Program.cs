@@ -152,25 +152,31 @@ namespace ConsoleApp1
             int wynik = 0;
             {
                 Console.WriteLine("Ile chcesz pytan? ");
-                Console.WriteLine("Uwaga wprowadzone odpowiedzi musza byc wilekimi literami");
                 q = Convert.ToInt16(Console.ReadLine());
-                string[] questions = new string[q];
+                string[] pytania = new string[q];
                 odpowiedzi = new char[q];
-                for (int i = 0; i < questions.Length; i++)
+                for (int i = 0; i < pytania.Length; i++)
                 {
                     numer = i + 1;
                     Console.WriteLine("Jaka jest odpowiedz na " + numer + " pytanie?");
                     odpowiedzi[i] = Convert.ToChar(Console.ReadLine());
+                    odpowiedzi[i] = char.ToUpper(odpowiedzi[i]);
                 }
                 Console.WriteLine("Test pierwszy miał ponizsze odpowiedzi");
                 Test();
-                wynik = punkty * 100 / questions.Length;
+                wynik = punkty * 100 / pytania.Length;
                 Console.WriteLine("Test pierwszy uzyskal " + wynik + "%");
 
-                wynik = punkty * 100 / questions.Length;
+
                 Console.WriteLine("Test drugi miał ponizsze odpowiedzi");
                 Test();
+                wynik = punkty * 100 / pytania.Length;
                 Console.WriteLine("Test drugi uzyskal " + wynik + "%");
+
+                Console.WriteLine("Test trzeci miał ponizsze odpowiedzi");
+                Test();
+                wynik = punkty * 100 / pytania.Length;
+                Console.WriteLine("Test trzeci uzyskal " + wynik + "%");
             }
 
             //zadanie 3 Testy
@@ -188,12 +194,12 @@ namespace ConsoleApp1
             x.Cykl();
             x.Zapisuj();
             x.Cykl();
-            for (int i = 0; i < 55; i++)
+            for (int i = 0; i < 55; i++) //po 50 powinno poinformowac ze kolejka jest pelna
             {
                 x.Wczytuj();
                 x.Cykl();
             }
-            for (int i = 0; i < 55; i++)
+            for (int i = 0; i < 55; i++) //po0 powinno poinformowac ze kolejka jest pusta
             {
                 x.Zapisuj();
                 x.Cykl();
